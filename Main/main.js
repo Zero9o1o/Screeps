@@ -16,23 +16,18 @@ var BUILD_COST_TOUGH = 10;
 
 module.exports.loop = function () {
 	
-	//console.log(0);
 	for(var name in Memory.creeps) {
-		console.log(name);
+		var creep = Memory.creeps[name];
         if(!Game.creeps[name]) {
-			console.log(!Game.creeps[name]);
-			if(Memory.creeps[name].memory.hasBuddy == true) {
-				console.log(1111);
-				var creepBuddy = Memory.creeps[name].memory.nameBuddy;
-				console.log(11111);
-				Game.creeps.creepBuddy.memory.hasBuddy = false;
-				console.log(111111);
-				console.log(Memory.creeps[name] + ": It was a good run my friend.");
-				console.log(creepBuddy + ": You better save me a good spot over there.");
+			if(creep.hasBuddy != undefined){
+				if(creep.hasBuddy == true) {
+					var buddy = creep.nameBuddy;
+					Game.creeps[buddy].memory.hasBuddy = false;
+					console.log(name + ": It was a good run my friend.");
+					console.log(buddy + ": You better save me a good spot over there.");
+				}
 			}
-			console.log(11111111);
             delete Memory.creeps[name];
-			console.log(111111111);
             console.log('Clearing non-existing creep memory:', name);
         }
 	}
@@ -83,16 +78,16 @@ module.exports.loop = function () {
 			var newName = spawn.createCreep([CARRY,CARRY,CARRY,MOVE], undefined, {role: 'Transporter'});
 		}
 		
-		var creepsWithoutBuddies = _.filter(Game.creeps, (creep) => creep.memory.hasBuddy == false);
-		var WorkersWithoutBuddies = _.filter(creepsWithoutBuddies, (creep) => creep.memory.role != 'Transporter');
-		var TransportersWithoutBuddies = _.filter(creepsWithoutBuddies, (creep) => creep.memory.role == 'Transporter');
+		var lonelyCreeps = _.filter(Game.creeps, (creep) => creep.memory.hasBuddy == false);
+		var lonelyWorkers = _.filter(lonelyCreeps, (creep) => creep.memory.role != 'Transporter');
+		var lonelyTransporters = _.filter(lonelyCreeps, (creep) => creep.memory.role == 'Transporter');
 		
-		if(WorkersWithoutBuddies.length != 0 && TransportersWithoutBuddies.length != 0){
-			WorkersWithoutBuddies[0].memory.nameBuddy = TransportersWithoutBuddies[0].name;
-			TransportersWithoutBuddies[0].memory.nameBuddy = WorkersWithoutBuddies[0].name;
-			WorkersWithoutBuddies[0].memory.hasBuddy = true;
-			TransportersWithoutBuddies[0].memory.hasBuddy = true;
-			console.log(TransportersWithoutBuddies[0].name + " has made " + WorkersWithoutBuddies[0].name + " their buddy!");
+		if(lonelyWorkers.length != 0 && lonelyTransporters.length != 0){
+			lonelyWorkers[0].memory.nameBuddy = lonelyTransporters[0].name;
+			lonelyTransporters[0].memory.nameBuddy = lonelyWorkers[0].name;
+			lonelyWorkers[0].memory.hasBuddy = true;
+			lonelyTransporters[0].memory.hasBuddy = true;
+			console.log(lonelyTransporters[0].name + " has made " + lonelyWorkers[0].name + " their buddy!");
 		}
 	}
 	
