@@ -51,17 +51,24 @@ module.exports.loop = function () {
 		room.memory.numBuilder = _.filter(Game.creeps, (creep) => creep.memory.role == 'Builder').length;
 		room.memory.numCombat = _.filter(Game.creeps, (creep) => creep.memory.role == 'Combat').length;
 		
+		
 		if(room.memory.numHarvesters < (room.memory.numSources - 3)){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([WORK,CARRY,MOVE], undefined, {role: 'Harvester'});
 		}
+		else if(room.memory.numMiner != 0){
+			var Harvester = _.filter(Game.creeps, (creep) => creep.memory.role == 'Harvester');
+			console.log(Harvester[0].name + ": I am not needed any more goodbye world!")
+			Harvester[0].suicide()
+		}
 		
-		if(room.memory.numMiner < (room.memory.numSources - 3)){
+		
+		if(room.memory.numMiner < (room.memory.numSources - 3) && room.memory.numTransporter != 0){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([WORK,CARRY,MOVE], undefined, {role: 'Miner'});
 		}
 		
-		if(room.memory.numUpgrader < 2 && room.memory.numHarvesters != 0 && room.memory.numTransporter != 0){
+		if(room.memory.numUpgrader < 2 && room.memory.numMiner != 0 && room.memory.numTransporter != 0){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([WORK,CARRY,MOVE], undefined, {role: 'Upgrader'});
 		}
@@ -73,7 +80,7 @@ module.exports.loop = function () {
 		}
 		**/
 		
-		if(room.memory.numTransporter < (room.memory.numHarvesters + room.memory.numBuilder + room.memory.numUpgrader + room.memory.numMiner) && room.memory.numHarvesters != 0){
+		if(room.memory.numTransporter < (room.memory.numHarvesters + room.memory.numBuilder + room.memory.numUpgrader + room.memory.numMiner)){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([CARRY,CARRY,CARRY,MOVE], undefined, {role: 'Transporter'});
 		}

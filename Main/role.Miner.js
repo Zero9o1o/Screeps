@@ -12,6 +12,20 @@ var roleMiner = {
 		if(creep.carry.energy < creep.carryCapacity) {
             creep.harvest(source);
         }
+		else{
+			if(creep.memory.hasBuddy == true){
+				var myBuddy = creep.memory.nameBuddy;
+				var myBuddyObj = Game.creeps[myBuddy];
+				if(creep.pos.isNearTo(myBuddyObj)){
+					if(myBuddyObj.memory.canCarry >= creep.carryCapacity){
+						creep.transfer(myBuddyObj, RESOURCE_ENERGY, creep.carryCapacity);
+					}
+					else{
+						creep.transfer(myBuddyObj, RESOURCE_ENERGY, myBuddyObj.memory.canCarry);
+					}
+				}
+			}
+		}
 	}	
 };
 
