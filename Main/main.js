@@ -15,6 +15,13 @@ var BUILD_COST_TOUGH = 10;
 
 module.exports.loop = function () {
 	
+	for(var name in Memory.creeps) {
+        if(!Game.creeps[name]) {
+            delete Memory.creeps[name];
+            console.log('Clearing non-existing creep memory:', name);
+        }
+	}
+	
 	for (var name in Game.rooms){
 		var room = Game.rooms[name];
 
@@ -26,6 +33,13 @@ module.exports.loop = function () {
 		if(room.memory.numMyCreeps == undefined || room.memory.numMyCreeps != room.find(FIND_MY_CREEPS).length){
 			room.memory.numMyCreeps = room.find(FIND_MY_CREEPS).length;
 		}
+		
+		room.memory.numHarvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'Harvester').length;
+		room.memory.numMiner = _.filter(Game.creeps, (creep) => creep.memory.role == 'Miner').length;
+		room.memory.numTransporter = _.filter(Game.creeps, (creep) => creep.memory.role == 'Transporter').length;
+		room.memory.numUpgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'Upgrader').length;
+		room.memory.numBuilder = _.filter(Game.creeps, (creep) => creep.memory.role == 'Builder').length;
+		room.memory.numCombat = _.filter(Game.creeps, (creep) => creep.memory.role == 'Combat').length;
 	}
 
     for(var name in Game.creeps) {
