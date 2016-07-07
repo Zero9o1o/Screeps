@@ -5,6 +5,7 @@ var roleUpgrader = require('role.Upgrader');
 var roleBuilder = require('role.Builder');
 var roleCombat = require('role.Combat');
 
+/**
 var BUILD_COST_MOVE = 50;
 var BUILD_COST_WORK = 100;
 var BUILD_COST_CARRY = 50;
@@ -13,6 +14,7 @@ var BUILD_COST_RANGED_ATTACK = 150;
 var BUILD_COST_HEAL = 250;
 var BUILD_COST_CLAIM = 600;
 var BUILD_COST_TOUGH = 10;
+**/
 
 module.exports.loop = function () {
 	
@@ -50,7 +52,6 @@ module.exports.loop = function () {
 		room.memory.numUpgrader = _.filter(Game.creeps, (creep) => creep.memory.role == 'Upgrader').length;
 		room.memory.numBuilder = _.filter(Game.creeps, (creep) => creep.memory.role == 'Builder').length;
 		room.memory.numCombat = _.filter(Game.creeps, (creep) => creep.memory.role == 'Combat').length;
-		
 		
 		if(room.memory.numHarvesters < (room.memory.numSources - 3) && room.memory.numMiner == 0){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
