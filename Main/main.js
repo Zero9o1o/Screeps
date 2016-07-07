@@ -73,7 +73,7 @@ module.exports.loop = function () {
 			var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'Upgrader'});
 		}
 		
-		/
+		
 		if(room.memory.numBuilder < 2 && room.memory.numMiner != 0 && room.memory.numTransporter != 0){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE,MOVE], undefined, {role: 'Builder'});
