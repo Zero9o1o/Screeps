@@ -19,7 +19,7 @@ var roleTransporter = {
 					var structureEnergy = structures.energy;
 					var structureEnergyMax = structures.energyCapacity;
 					var structureCanTake = (structureEnergyMax - structureEnergy);
-					if(structures.energyCapacity <= creep.carryCapacity){
+					if(structures.energyCapacity > creep.carryCapacity){
 						creep.transfer(structures, RESOURCE_ENERGY, creep.carryCapacity);
 					}
 					else{
