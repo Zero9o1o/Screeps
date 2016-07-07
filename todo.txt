@@ -1,0 +1,4 @@
+Add teir system for spawning based on max energy of spawner.
+Auto expand extender.
+Auto build roads.
+Have creeps map out shortest paths and store them.

@@ -1,6 +1,5 @@
 var roleTransporter = {
 	run: function(creep){
-	    
 	}	
 };
 
