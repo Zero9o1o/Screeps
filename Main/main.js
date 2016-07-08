@@ -64,7 +64,7 @@ module.exports.loop = function () {
 		}
 		
 		
-		if(room.memory.numMiner < (room.memory.numSources - 3) && room.memory.numTransporter != 0){
+		if(room.memory.numMiner < (room.memory.numSources - 3 + room.memory.numUpgrader) && room.memory.numTransporter != 0){
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'Miner'});
 		}
