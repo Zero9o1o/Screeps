@@ -6,7 +6,7 @@ var roleMiner = {
 		var source = Game.getObjectById(creep.memory.sourceId);
 		
 		if(!creep.pos.isNearTo(source)){
-			creep.moveTo(source);
+			creep.moveTo(source,{reusePath: 50});
 		}
 		
 		if(creep.carry.energy < creep.carryCapacity) {

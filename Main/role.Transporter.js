@@ -20,9 +20,7 @@ var roleTransporter = {
 		});
 		if(spawners.length != 0){
 			Closest = spawners;
-		}
-		console.log(creep + " -> " + Closest);
-		
+		}		
 		var creepHas = creep.carry.energy;
 		var creepMax = creep.carryCapacity;
 		creep.memory.canCarry = (creepMax - creepHas);
@@ -32,13 +30,14 @@ var roleTransporter = {
 			var myBuddyMem = myBuddyObj.memory;
 			var myBuddyCanCarry = (myBuddyObj.carryCapacity - myBuddyObj.carry.energy);
 			
-			console.log(creep + " -> " + myBuddyMem.role);
 			if(myBuddyMem.role == "Miner") {
 				if(creep.carry.energy < creep.carryCapacity) {
-					creep.moveTo(myBuddyObj);
+					//creep.moveTo(myBuddyObj);
+					creep.moveTo(myBuddyObj, {reusePath: 50});
 				}
 				else{
-					creep.moveTo(Closest[0]);
+					//creep.moveTo(Closest[0]);
+					creep.moveTo(Closest[0], {reusePath: 50});
 					var structureEnergy = Closest[0].energy;
 					var structureEnergyMax = Closest[0].energyCapacity;
 					var structureCanTake = (structureEnergyMax - structureEnergy);
@@ -53,9 +52,8 @@ var roleTransporter = {
 			
 			if(myBuddyMem.role == "Upgrader" && creep.room.memory.numMiner == (creep.room.memory.numSources - 3 + creep.room.memory.numUpgrader) && creep.room.memory.numTransporter == (creep.room.memory.numHarvesters + creep.room.memory.numBuilder + creep.room.memory.numUpgrader + creep.room.memory.numMiner)){
 				if(creep.carry.energy > 0) {
-					creep.moveTo(myBuddyObj);
-					console.log(myBuddyObj + " " + (myBuddyObj.carryCapacity > creep.carry.energy));
-					console.log(myBuddyCanCarry);
+					//creep.moveTo(myBuddyObj);
+					creep.moveTo(myBuddyObj, {reusePath: 50});
 					if(myBuddyCanCarry < creep.carry.energy){
 					    
 						creep.transfer(myBuddyObj, RESOURCE_ENERGY, myBuddy.canCarry);
@@ -66,7 +64,8 @@ var roleTransporter = {
 				}
 				else if(creep.carry.energy != creep.carryCapacity){
 					
-					creep.moveTo(Closest[0]);
+					//creep.moveTo(Closest[0]);
+					creep.moveTo(Closest[0], {reusePath: 50});
 					var structureEnergy = Closest[0].energy;
 					var structureEnergyMax = Closest[0].energyCapacity;
 					var structureCanTake = (structureEnergyMax - structureEnergy);
