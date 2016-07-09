@@ -79,22 +79,6 @@ var roleTransporter = {
 				}
 			}
 		}
-		/**
-		else{
-			if(creep.carry.energy != 0){
-				creep.moveTo(Closest[0]);
-				var structureEnergy = Closest[0].energy;
-				var structureEnergyMax = Closest[0].energyCapacity;
-				var structureCanTake = (structureEnergyMax - structureEnergy);
-				if(Closest[0].energyCapacity > creep.carryCapacity){
-					creep.transfer(Closest[0], RESOURCE_ENERGY, creep.carryCapacity);
-				}
-				else{
-					creep.transfer(Closest[0], RESOURCE_ENERGY, structureCanTake);
-				}
-			}
-		}
-		**/
 	}	
 };
 

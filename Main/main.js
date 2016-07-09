@@ -5,17 +5,6 @@ var roleUpgrader = require('role.Upgrader');
 var roleBuilder = require('role.Builder');
 var roleCombat = require('role.Combat');
 
-/**
-var BUILD_COST_MOVE = 50;
-var BUILD_COST_WORK = 100;
-var BUILD_COST_CARRY = 50;
-var BUILD_COST_ATTACK = 80;
-var BUILD_COST_RANGED_ATTACK = 150;
-var BUILD_COST_HEAL = 250;
-var BUILD_COST_CLAIM = 600;
-var BUILD_COST_TOUGH = 10;
-**/
-
 module.exports.loop = function () {
 	
 	for(var name in Memory.creeps) {
